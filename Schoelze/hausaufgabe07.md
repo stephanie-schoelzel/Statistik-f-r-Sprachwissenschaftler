@@ -322,19 +322,129 @@ Jetzt können Sie ein paar Fragen über die Verteilung konkret beantworten:
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absatz pro Punkt auf der Liste.)
 
 ## Von Noten zu Perzentilen -- ich möchte mich den anderen überlegen fühlen!
+Manchmal will man in die andere Richtung gehen -- z.B. um die Frage beantworten zu können, welche Note man erreichen muss, um überdurchschnittlich zu sein. Dafür haben wir `qnorm()`. Überdurchschnittlich heißt "besser als die Hälfte abscheiden" (duh!) und wir nehmen wieder an, dass die Standardabweichung gleich 3 ist. Dann haben wir die Aussage:
+
+Um überdurchschnittlich zu sein, muss man mehr als 8 Notenpunkte bekommen. 
+
+Nicht so überraschend, dass "überdurchschnittlich" auch "mehr Punkte als den Durchschnitt bekommen" heißt! Wie sieht es aus, wenn wir besser als 99% der anderen abschließen möchten?
+
+Um in dem besten 1% abzuschließen, muss man zumindest 14.979 Notenpunkte bekommen. 
+
+
+## z-Transformation
+Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ 
+
+```
+
+Error in eval(expr, envir, enclos) : konnte Funktion "citep" nicht finden
+
+```
+
+, setzt die Verwaltung das Signikanzniveau auf 0.06. 
+
+Der kritische Wert für einen einseitigen $z$-Test ist 1.5548.
+
+Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$ `r(qnorm 0.97)`.
+
+### Gibt es einen Unterschied?
+Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen Unterschied es geben könnte. (Welche Testart sollte man hier nutzen? Zweiseitigen z-Test)
+
+In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
+
+
+```r
+z7 <- sqrt(7) * ((10 - 8)/3)
+print(z7)
+```
+
+```
+## [1] 1.764
+```
+
+
+
+```
+
+
+Das ist ein **insignifikanter** Unterschied. 
+
+In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
+
+
+```r
+z50 <- sqrt(50) * ((10 - 8)/3)
+print(z50)
+```
+
+```
+## [1] 4.714
+```
+
+```r
+
+```
+
+
+
+Das ist ein **signifikanter** Unterschied. 
+
+Ist die Benotung vom Dozenten weniger als ideal? 
+
+### Ein anderer, böserer? Dozent
+Die Verwaltung ist auch auf einen anderen Dozenten aufmerksam geworden, weil manche Studenten behaupten, er würde zu streng benoten. (Welche Testart sollte man hier nutzen? Einseitigen z-Test)
+
+In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7. Der Dozent sagt, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
+
+Berechnen Sie den $z$-Test:
+
+
+```r
+z20 <- sqrt(20) * ((8 - 7)/3)
+print(z20)
+```
+
+```
+## [1] 1.491
+```
+
+```r
+
+```
+
+
+
+Das ist ein **insignifikanter** Unterschied. 
+
+Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
+
+Berechnen Sie den $z$-Test:
+
+
+```r
+z25 <- sqrt(25) * ((8 - 7)/3)
+print(z25)
+```
+
+```
+## [1] 1.667
+```
+
+```r
+
+```
+
+
+
+Das ist ein **signifikanter** Unterschied. 
 
 ## Zum Überlegen
-Gibt es einen Grund, weshalb die Noten normalverteilt sein sollten? Warum ist das die übliche Annahme?
+Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
 
-# Andere Verteilungen
-Die Normalverteilung ist nicht die einzige wichtige Verteilung. Manche Verteilungen entstehen ganz natürlich aus dem Vergleich anderer Verteilungen und werden zur Berechnung von Teststatistiken genutzt ($F$,$\chi^2$, $t$). Diese Verteilungen werden wir besprechen, wenn wir den entsprechenden Test lernen. 
+# Bibliografie
 
-
-## Binomialverteilung 
-
-## Pareto Verteilung
-
-## Poisson Verteilung
+```
+## Error: konnte Funktion "bibliography" nicht finden
+```
 
 
 # Lizenz
