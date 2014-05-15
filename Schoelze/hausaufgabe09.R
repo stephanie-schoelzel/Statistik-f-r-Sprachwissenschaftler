@@ -139,18 +139,28 @@ print(logrt.plot)
 Test1<-var.test(rt$logRT~rt$subj)
 print (var.test(rt$logRT~rt$subj))
 
-if (Test1$p.value > 0.05){print("F-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
+if (Test1$p.value < 1){print("F-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
 
-Test2<-leveneTest(rt$RT~rt$subj)
+Test2<-leveneTest(rt$logRT~rt$subj)
+
 print(leveneTest(rt$logRT~rt$subj))
 
-if (Test2$){print("Levene-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
+if (Test2>0){print("Levene-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Daten normal verteilt sind. 
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
+subj1.logRT<-log(rt[rt$subj=="1","RT"])
 
+shapiro.log<-shapiro.test(subj1.logRT)
+shapiro.log <- shapiro.test(rt[rt$subj=="1",rt$"RT"])
+
+if (shapiro.log$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
+
+shapiro2.log <- shapiro.test(rt[rt$subj==2,"RT"])
+
+if (shapiro2.log$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
 # CODE_HIER
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
