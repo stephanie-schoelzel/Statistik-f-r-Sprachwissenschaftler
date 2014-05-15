@@ -74,7 +74,8 @@ print (var.test(rt$RT~rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Ungleich" ist.
-# Die Varianzen sind homogen, da der F-Wert stark von 1 abweicht.
+# Die Varianzen sind homogen, da der P-Wert 0.04 ist.
+
 
 # Berechenen Sie den Levene Test:
 
@@ -83,7 +84,7 @@ print(leveneTest(rt$RT~rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
-# Der P-Wert ist hier 0.96, was bedeutet, dass die Varianzen homogen sind.
+# Der P-Wert ist hier 0.36, was bedeutet, dass die Varianzen homogen sind.
 
 # Für heterogene Varianzen haben wir eine Variante des  t-Tests gesehen, die
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
@@ -151,17 +152,14 @@ if (Test2>0){print("Levene-Test insignikant, die Daten sind normal verteilt.")}e
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Daten normal verteilt sind. 
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
-subj1.logRT<-log(rt[rt$subj=="1","RT"])
+shapiro.subj1.logRT<-shapiro.test(rt[rt$subj=="1","logRT"])
 
-shapiro.log<-shapiro.test(subj1.logRT)
-shapiro.log <- shapiro.test(rt[rt$subj=="1",rt$"RT"])
+if (shapiro.subj1.logRT$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
 
-if (shapiro.log$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
+shapiro.subj2.logRT <- shapiro.test(rt[rt$subj==2,"logRT"])
 
-shapiro2.log <- shapiro.test(rt[rt$subj==2,"RT"])
+if (shapiro.subj2.logRT$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
 
-if (shapiro2.log$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
-# CODE_HIER
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
