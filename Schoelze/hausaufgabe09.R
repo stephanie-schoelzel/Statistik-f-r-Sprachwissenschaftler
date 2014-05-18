@@ -73,8 +73,8 @@ print(rt.plot)
 print (var.test(rt$RT~rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
-# F-Test "Varianzen Ungleich" ist.
-# Die Varianzen sind nicht homogen, da der P-Wert 0.04 ist und damit kleiner als 0.5. Die Nullhypothese hat sich hier also bestätigt.
+# F-Test "Varianzen gleich" ist.
+# Die Varianzen sind nicht homogen, da der P-Wert 0.04 ist und damit kleiner als 0.5. Die Nullhypothese muss hier also verworfen werden.
 
 
 # Berechenen Sie den Levene Test:
