@@ -74,7 +74,7 @@ print (var.test(rt$RT~rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Ungleich" ist.
-# Die Varianzen sind homogen, da der P-Wert 0.04 ist.
+# Die Varianzen sind nicht homogen, da der P-Wert 0.04 ist und damit kleiner als 0.5. Die Nullhypothese hat sich hier also bestätigt.
 
 
 # Berechenen Sie den Levene Test:
@@ -84,12 +84,12 @@ print(leveneTest(rt$RT~rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
-# Der P-Wert ist hier 0.36, was bedeutet, dass die Varianzen homogen sind.
+# Der P-Wert ist hier 0.36, was bedeutet, dass die Varianzen homogen sind, da p>0.5.
 
 # Für heterogene Varianzen haben wir eine Variante des  t-Tests gesehen, die
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
 # Variante ähnliche bzw. (fast) gleiche Ergebnisse liefern. Ist das hier der
-# Fall?
+# Fall? : Ja
 subj1.RT<-rt[rt$subj=="1","RT"]
 subj2.RT<-rt[rt$subj=="2","RT"]
 two.sample <- t.test(subj1.RT,subj2.RT,var.equal=TRUE)
@@ -121,6 +121,8 @@ if (shapiro$p.value > 0.05){print("Shapiro's test insignikant, die Daten sind no
 
 shapiro2 <- shapiro.test(rt[rt$subj==2,"RT"])
 
+print(shapiro2)
+
 if (shapiro2$p.value > 0.05){print("Shapiro's 2. test insignikant, die Daten sind normal verteilt.")}else{print("Shapiro's 2.test signifikant, die Daten sind nicht normal verteilt.")}
 
 # Wir haben auch Transformationen bei schiefen Datenverteilungen angesprochen.
@@ -140,13 +142,13 @@ print(logrt.plot)
 Test1<-var.test(rt$logRT~rt$subj)
 print (var.test(rt$logRT~rt$subj))
 
-if (Test1$p.value < 1){print("F-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
+if (Test1$p.value < 0.5){print("F-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
 
 Test2<-leveneTest(rt$logRT~rt$subj)
 
 print(leveneTest(rt$logRT~rt$subj))
 
-if (Test2>0){print("Levene-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
+if (Test2$Df>0.5){print("Levene-Test insignikant, die Daten sind normal verteilt.")}else{print("F-Test signifikant, die Daten sind nicht normal verteilt.")}
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
