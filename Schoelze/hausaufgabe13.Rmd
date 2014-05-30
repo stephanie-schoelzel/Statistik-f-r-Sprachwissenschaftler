@@ -37,7 +37,7 @@ Um einiges leichter zu machen, sollten Sie auch die Datei `priming.tab` aus dem 
 30 Subjects x 20 Items x 8 Bedingungen = `r 30*20*8` Trials.
 
 ```{r}
-priming <- read.table("Data/priming.tab",header = T)
+priming <- read.table("priming.tab",header = T)
 priming$subj <- as.factor(priming$subj)
 priming <- subset(priming, item <= 20) # Filler ausschließen
 priming$item <- as.factor(priming$item)
@@ -112,7 +112,6 @@ Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabel
 ```{r, results='asis'}
 priming.by.item.wide1 <- dcast(priming.by.item,item ~ cond, value.var="RT")
 print(xtable(priming.by.item.wide1),type="html",include.rownames=FALSE)
-
 ```
 
 
@@ -180,7 +179,7 @@ priming.f2 <- ezANOVA(priming
                       , within=.(prime,target)
                       , detailed=TRUE
                       )
-{r, results='asis'}
+```{r, results='asis'}
 
 print(xtable(priming.f2$ANOVA),type="html",include.rownames=FALSE)
 
