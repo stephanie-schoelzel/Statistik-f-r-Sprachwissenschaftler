@@ -90,6 +90,8 @@ print(xtable(priming.by.subject.wide2),type="html",include.rownames=FALSE)
 
 Welches Format macht am meisten Sinn?
 
+Das breitere Format mit Versuchspersonen als Zeilen und Bedingungen als Spalten.
+
 Natürlich müssen wir auch die Daten grafisch darstellen:
 ```{r}
 ggplot(data=priming.by.subject) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.3)
@@ -98,7 +100,7 @@ ggplot(data=priming.by.subject) + geom_violin(aes(x=cond,y=RT,color=cond,fill=co
 ggplot(data=priming.by.subject) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=cond),alpha=0.5)
 ```
 
-Sind alle Plots gleich gut?
+Sind alle Plots gleich gut? Nein, für mich ist der Violinenplot am übersichtlichsten, weil er alle Konditionen einzeln darstellt, man aber dennoch sehr gut Vergleiche ziehen kann.
 
 ### By Item
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
@@ -124,6 +126,8 @@ ggplot(data=priming.by.subject) + geom_violin(aes(x=cond,y=RT,color=cond,fill=co
 
 
 Sehen die Daten by Subject und by Item gleich aus? Wie sehen sie im Vergleich zu den Single-Trial-Daten aus?
+
+Die Plots by Subject und by Item ähneln sich.Im Vergleich zum Single Trail sind alle Konditionen außer DE weiter gestreut.
 
 # Subject- und Item-Analysen
 
