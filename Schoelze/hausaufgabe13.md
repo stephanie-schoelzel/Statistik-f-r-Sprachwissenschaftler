@@ -95,7 +95,7 @@ print(xtable(priming.by.subject), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:53:56 2014 -->
+<!-- Sun Jun 01 15:34:50 2014 -->
 <TABLE border=1>
 <TR> <TH> cond </TH> <TH> subj </TH> <TH> RT </TH>  </TR>
   <TR> <TD> DD </TD> <TD> 1 </TD> <TD align="right"> 569.75 </TD> </TR>
@@ -231,7 +231,7 @@ print(xtable(priming.by.subject.wide1), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:53:56 2014 -->
+<!-- Sun Jun 01 15:34:50 2014 -->
 <TABLE border=1>
 <TR> <TH> subj </TH> <TH> DD </TH> <TH> DE </TH> <TH> ED </TH> <TH> EE </TH>  </TR>
   <TR> <TD> 1 </TD> <TD align="right"> 569.75 </TD> <TD align="right"> 655.15 </TD> <TD align="right"> 592.00 </TD> <TD align="right"> 587.70 </TD> </TR>
@@ -275,7 +275,7 @@ print(xtable(priming.by.subject.wide2), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:53:56 2014 -->
+<!-- Sun Jun 01 15:34:50 2014 -->
 <TABLE border=1>
 <TR> <TH> cond </TH> <TH> 1 </TH> <TH> 2 </TH> <TH> 3 </TH> <TH> 4 </TH> <TH> 5 </TH> <TH> 6 </TH> <TH> 7 </TH> <TH> 8 </TH> <TH> 9 </TH> <TH> 10 </TH> <TH> 11 </TH> <TH> 12 </TH> <TH> 13 </TH> <TH> 14 </TH> <TH> 15 </TH> <TH> 16 </TH> <TH> 17 </TH> <TH> 18 </TH> <TH> 19 </TH> <TH> 20 </TH> <TH> 21 </TH> <TH> 22 </TH> <TH> 23 </TH> <TH> 24 </TH> <TH> 25 </TH> <TH> 26 </TH> <TH> 27 </TH> <TH> 28 </TH> <TH> 29 </TH> <TH> 30 </TH>  </TR>
   <TR> <TD> DD </TD> <TD align="right"> 569.75 </TD> <TD align="right"> 512.95 </TD> <TD align="right"> 503.15 </TD> <TD align="right"> 616.45 </TD> <TD align="right"> 698.45 </TD> <TD align="right"> 562.75 </TD> <TD align="right"> 584.60 </TD> <TD align="right"> 546.15 </TD> <TD align="right"> 457.35 </TD> <TD align="right"> 496.60 </TD> <TD align="right"> 496.35 </TD> <TD align="right"> 556.10 </TD> <TD align="right"> 491.45 </TD> <TD align="right"> 556.90 </TD> <TD align="right"> 417.20 </TD> <TD align="right"> 526.90 </TD> <TD align="right"> 502.75 </TD> <TD align="right"> 470.75 </TD> <TD align="right"> 626.45 </TD> <TD align="right"> 815.25 </TD> <TD align="right"> 673.60 </TD> <TD align="right"> 534.50 </TD> <TD align="right"> 532.80 </TD> <TD align="right"> 513.20 </TD> <TD align="right"> 491.65 </TD> <TD align="right"> 415.60 </TD> <TD align="right"> 500.70 </TD> <TD align="right"> 494.65 </TD> <TD align="right"> 507.90 </TD> <TD align="right"> 512.10 </TD> </TR>
@@ -338,7 +338,7 @@ print(xtable(priming.by.item.wide1), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:53:57 2014 -->
+<!-- Sun Jun 01 15:34:52 2014 -->
 <TABLE border=1>
 <TR> <TH> item </TH> <TH> DD </TH> <TH> DE </TH> <TH> ED </TH> <TH> EE </TH>  </TR>
   <TR> <TD> 1 </TD> <TD align="right"> 521.33 </TD> <TD align="right"> 620.40 </TD> <TD align="right"> 551.40 </TD> <TD align="right"> 602.17 </TD> </TR>
@@ -411,7 +411,7 @@ print(xtable(priming.f1$ANOVA), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:54:02 2014 -->
+<!-- Sun Jun 01 15:34:57 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 29.00 </TD> <TD align="right"> 38940134.70 </TD> <TD align="right"> 704326.36 </TD> <TD align="right"> 1603.32 </TD> <TD align="right"> 0.00 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -436,7 +436,7 @@ print(xtable(priming.f1$ANOVA, display = c("s", "s", "d", "d", "f", "f", "f",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:54:02 2014 -->
+<!-- Sun Jun 01 15:34:57 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 38940134.70 </TD> <TD align="right"> 704326.36 </TD> <TD align="right"> 1603.32 </TD> <TD align="right"> 0.0000000000000000000000000062 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -480,7 +480,7 @@ print(xtable(priming.f2$ANOVA), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:54:05 2014 -->
+<!-- Sun Jun 01 15:34:59 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 19.00 </TD> <TD align="right"> 25960089.80 </TD> <TD align="right"> 92393.37 </TD> <TD align="right"> 5338.50 </TD> <TD align="right"> 0.00 </TD> <TD> * </TD> <TD align="right"> 0.99 </TD> </TR>
@@ -546,7 +546,7 @@ print(xtable(priming.f1.englisch.target$ANOVA, display = c("s", "s", "d", "d",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:54:06 2014 -->
+<!-- Sun Jun 01 15:35:00 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 20970809.92 </TD> <TD align="right"> 405363.34 </TD> <TD align="right"> 1500.27 </TD> <TD align="right"> 0.000000000000000000000000016 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -577,7 +577,7 @@ print(xtable(priming.f1.deutsch.target$ANOVA, display = c("s", "s", "d", "d",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Fri May 30 15:54:06 2014 -->
+<!-- Sun Jun 01 15:35:00 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 18025035.84 </TD> <TD align="right"> 345779.58 </TD> <TD align="right"> 1511.73 </TD> <TD align="right"> 0.000000000000000000000000014 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
