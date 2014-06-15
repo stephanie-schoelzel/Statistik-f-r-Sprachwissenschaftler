@@ -71,7 +71,7 @@ Haben Klarheit und/oder Schliff Einfluss auf den Preis? Wenn ja, gibt es Interak
 
 ```{r}
 ggplot(diamonds) + geom_violin(aes(x=clarity,y=price,color=clarity,fill=clarity), alpha=0.5)
-```}
+
 ggplot(data=diamonds) + geom_density(aes(x=price,color=clarity,fill=clarity),alpha=0.3)
 
 ggplot(diamonds) + geom_violin(aes(x=cut,y=price,color=cut,fill=cut), alpha=0.5)
@@ -81,38 +81,43 @@ ggplot(data=diamonds) + geom_density(aes(x=price,color=cut,fill=cut),alpha=0.3)
 ```
 Lineare Regression
 ```{r}
-lm.clarity <- lm(price~clarity,data=diamonds)
+clarity.numeric <- as.numeric(diamonds$clarity)
+lm.clarity <- lm(price~clarity.numeric,data=diamonds)
 
 summary(lm.clarity)
 
-lm.cut<-lm(price~cut,data=diamonds)
+cut.numeric<-as.numeric(diamonds$cut)
+
+lm.cut<-lm(price~cut.numeric,data=diamonds)
 
 summary(lm.cut)
 
 ```
 Beide unabhängige Variablen haben einen signifikanten p-Wert und damit Einfluss auf den Preis.
-```{r}
-ANOVA0<-aov(price ~clarity, data=diamonds)
 
-ANOVA1<-aov(price~ cut, data = diamonds)
+ANOVA:
+```{r}
+ANOVA0<-aov(price ~clarity.numeric, data=diamonds)
+
+ANOVA1<-aov(price~ cut.numeric, data = diamonds)
 
 summary(ANOVA0)
 
 summary(ANOVA1)
 
 ```
-Sowohl Klarheit als auch Schliff haben eine hochsignifikante Auswirkung auf den Preis.
+Sowohl Klarheit als auch Schliff haben eine hochsignifikante Auswirkung auf den Preis.Der F-Wert der Klarheit ist allerdings deutlich h?her
 
 Gibt es eine Interaktion zwischen Klarheit und Schliff?
 
 ```{r}
-ANOVA2<- aov(price~cut*clarity, data = diamonds)
+ANOVA2<- aov(price~cut.numeric*clarity.numeric, data = diamonds)
 
 summary(ANOVA2)
 
 ```
 
-Die Ergebnisse sind hochsignifikant.
+Die Ergebnisse sind hochsignifikant. Allerings haben sich die Residuals nicht ver?ndert, es konnte dadurch also nicht mehr Varianz erkl?rt werden.
 
 
 

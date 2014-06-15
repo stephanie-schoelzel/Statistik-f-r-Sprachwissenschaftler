@@ -107,7 +107,7 @@ Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98
 Hier ein paar Grafiken (auch im Buch zu finden):
 
 ```r
-ggplot(diamonds, aes(x = carat, y = price, color = color)) + geom_point()
+ggplot(diamonds, aes(x = carat, y = price)) + geom_point(alpha = 0.3) + geom_smooth(method = "lm")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-41.png) 
@@ -131,3 +131,164 @@ Haben Sie dabei explorativ oder konfirmativ gearbeitet? Was hat das für eine Au
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+
+# Analyse
+UV = price
+ 
+Haben Klarheit und/oder Schliff Einfluss auf den Preis? Wenn ja, gibt es Interaktionen?
+
+
+```r
+ggplot(diamonds) + geom_violin(aes(x = clarity, y = price, color = clarity, 
+    fill = clarity), alpha = 0.5)
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-51.png) 
+
+```r
+
+ggplot(data = diamonds) + geom_density(aes(x = price, color = clarity, fill = clarity), 
+    alpha = 0.3)
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-52.png) 
+
+```r
+
+ggplot(diamonds) + geom_violin(aes(x = cut, y = price, color = cut, fill = cut), 
+    alpha = 0.5)
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-53.png) 
+
+```r
+
+ggplot(data = diamonds) + geom_density(aes(x = price, color = cut, fill = cut), 
+    alpha = 0.3)
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-54.png) 
+
+Lineare Regression
+
+```r
+clarity.numeric <- as.numeric(diamonds$clarity)
+lm.clarity <- lm(price ~ clarity.numeric, data = diamonds)
+
+summary(lm.clarity)
+```
+
+```
+## 
+## Call:
+## lm(formula = price ~ clarity.numeric, data = diamonds)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -4673  -2673  -1466   1151  16277 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       5373.2       45.1   119.1   <2e-16 ***
+## clarity.numeric   -355.6       10.3   -34.5   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3950 on 53938 degrees of freedom
+## Multiple R-squared:  0.0216,	Adjusted R-squared:  0.0215 
+## F-statistic: 1.19e+03 on 1 and 53938 DF,  p-value: <2e-16
+```
+
+```r
+
+cut.numeric <- as.numeric(diamonds$cut)
+
+lm.cut <- lm(price ~ cut.numeric, data = diamonds)
+
+summary(lm.cut)
+```
+
+```
+## 
+## Call:
+## lm(formula = price ~ cut.numeric, data = diamonds)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -4151  -2894  -1537   1390  15083 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   4678.9       62.4    75.0   <2e-16 ***
+## cut.numeric   -191.1       15.4   -12.4   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3980 on 53938 degrees of freedom
+## Multiple R-squared:  0.00286,	Adjusted R-squared:  0.00284 
+## F-statistic:  155 on 1 and 53938 DF,  p-value: <2e-16
+```
+
+Beide unabhängige Variablen haben einen signifikanten p-Wert und damit Einfluss auf den Preis.
+
+ANOVA:
+
+```r
+ANOVA0 <- aov(price ~ clarity.numeric, data = diamonds)
+
+ANOVA1 <- aov(price ~ cut.numeric, data = diamonds)
+
+summary(ANOVA0)
+```
+
+```
+##                    Df   Sum Sq  Mean Sq F value Pr(>F)    
+## clarity.numeric     1 1.85e+10 1.85e+10    1188 <2e-16 ***
+## Residuals       53938 8.40e+11 1.56e+07                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+
+summary(ANOVA1)
+```
+
+```
+##                Df   Sum Sq  Mean Sq F value Pr(>F)    
+## cut.numeric     1 2.46e+09 2.46e+09     155 <2e-16 ***
+## Residuals   53938 8.56e+11 1.59e+07                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+Sowohl Klarheit als auch Schliff haben eine hochsignifikante Auswirkung auf den Preis.Der F-Wert der Klarheit ist allerdings deutlich h?her
+
+Gibt es eine Interaktion zwischen Klarheit und Schliff?
+
+
+```r
+ANOVA2 <- aov(price ~ cut.numeric * clarity.numeric, data = diamonds)
+
+summary(ANOVA2)
+```
+
+```
+##                                Df   Sum Sq  Mean Sq F value  Pr(>F)    
+## cut.numeric                     1 2.46e+09 2.46e+09   157.9 < 2e-16 ***
+## clarity.numeric                 1 1.66e+10 1.66e+10  1069.3 < 2e-16 ***
+## cut.numeric:clarity.numeric     1 4.32e+08 4.32e+08    27.8 1.4e-07 ***
+## Residuals                   53936 8.39e+11 1.56e+07                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+Die Ergebnisse sind hochsignifikant. Allerings haben sich die Residuals nicht ver?ndert, es konnte dadurch also nicht mehr Varianz erkl?rt werden.
+
+
+
+
+
+
+
