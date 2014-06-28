@@ -47,7 +47,10 @@ Die Items in dieser Studie sind "Szenarien", also Situationen wo man mehr oder w
 
 Allerdings merken wir, dass `scenario` falsch kodiert ist, was wir korrigieren müssen:
 
-CODE_BLOCK_HIER
+```{r}
+stimmen.scenario <- as.factor(stimmen$scenario)
+```
+
 
 ## Auswirkung der experimentellen Manipulation
 Um einen groben Eindruck zu bekommen, können wir schnell einen Boxplot machen:
@@ -74,13 +77,25 @@ Wir können auf ähnliche Art und Weise ein Plot für die Versuchspersonen und S
 
 Erstellen Sie einen Boxplot für `frequency` nach `subject`, wie oben für `frequency` nach `attitude` gemacht wurde (hier ohne Aufteilung nach Geschlecht). Dieser gibt uns einen Blick in die Varianz innerhalb und zwischen Versuchspersonen. 
 
-CODE_BLOCK_HIER
+```
+```{r, fig.width=7, fig.height=4, fig.align='center'}
+ggplot(stimmen) + geom_boxplot(aes(x=subject,y=frequency))
+
+```
+
+```
+
 
 Machen Sie das gleiche für `scenario`. 
 
-CODE_BLOCK_HIER
+```{r}
+ggplot(stimmen) + geom_boxplot(aes(x=stimmen.scenario,y=frequency))
+```
+
 
 Gibt es mehr Varianz zwischen Szenarien oder zwischen Versuchspersonen? 
+
+Zwischen den Versuchspersonen.
 
 Die Varianz zwischen Versuchspersonen bzw. Szenarien beschreiben wir durch zufällige Effekte. Es gibt offentsichlich einen Unterschied zwischen den verschiedenen Basisfrequenzen der Einzelversuchenpersonen und es scheint auch zwischen den verschiedenen Szenarien einen Unterschied zu geben, d.h. wir haben auf jeden Fall Intercepts in unserer RE-Struktur. Ob wir auch weitere Struktur in der RE-Struktur aufnehmen, schauen wir uns erst später an.
 
@@ -111,8 +126,8 @@ Haben sich die Koeffizienten oder Standardfehler geändert?
 Jetzt berechen wir das Modell mit der Interaktion zwischen `gender` und `attitude`. 
 
 ```{r}
-#model.attitude.int <- CODE_HIER
-#summary(model.attitude.int)
+model.attitude.int <- lmer(frequency ~ gender * attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude.int)
 ```
 
 Haben sich die Koeffizienten oder Standardfehler geändert?
@@ -120,14 +135,14 @@ Haben sich die Koeffizienten oder Standardfehler geändert?
 Ist die Interaktion signifikant? Wir können uns den Koeffizienten anschauen, aber uns interessiert ob *das Model besser geworden ist*. Das testen wir mit `anova()`
 
 ```{r}
-#anova(model.attitude,model.attitude.int)
+anova(model.attitude,model.attitude.int)
 ```
 
 Hat die Interkation das Modell verbessert? Wenn ein komplexeres Modell nicht signifikant besser als ein einfacheres Modell ist, bleiben wir bei dem einfacheren Modell! 
 
 # Zufällige Effekte
 
-Wir haben bisher Modelle angeschaut, die nur Intercepts in der RE-Struktur haben. Wie `r citet("10.3389/fpsyg.2013.00328")` betont hat, sollten wir möglichst maximale RE-Strukturen nehmen, sonst haben wir anti-konservative Schätzungen, also erhöhten $\alpha$-Fehler. Hier könnten wir uns vorstellen, dass sich die Probanden nicht nur in ihrer Basistonlage (Intercept) unterscheiden, sondern auch in der Änderung der Tonlage nach Höflichkeit (Slope/Anstieg). Ähnlich können wir uns auch vorstellen, dass manche Szenarien einen größeren Unterschied in der Tonlage zwischen der informellen und der formellen Varianten als bei anderen hervorrufen. Es lohnt sich also, auch Antieg in die RE-Struktur aufzunehmen.
+Wir haben bisher Modelle angeschaut, die nur Intercepts in der RE-Struktur haben. Wie `r citet("10.3389/fpsyg.2013.00328")` betont hat, sollten wir möglichst maximale RE-Strukturen nehmen, sonst haben wir anti-konservative Schätzungen, also erhöhten $\alpha$-Fehler. Hier könnten wir uns vorstellen, dass sich die Probanden nicht nur in ihrer Basistonlage (Intercept) unterscheiden, sondern auch in der Änderung der Tonlage nach Höflichkeit (Slope/Anstieg). Ähnlich können wir uns auch vorstellen, dass manche Szenarien einen größeren Unterschied in der Tonlage zwischen der informellen und der formellen Varianten als bei anderen hervorrufen. Es lohnt sich also, auch Anstieg in die RE-Struktur aufzunehmen.
 
 ```{r}
 model.attitude.re.slope <- lmer(frequency ~ gender + attitude + (1+attitude|subject) + (1+attitude|scenario), data=stimmen, REML=FALSE)
@@ -138,7 +153,10 @@ Haben sich die Koeffizienten oder Standardfehler (im Vergleich zu `model.attitud
 
 Hat dieses Modell ein signifikante besseres Fit als `model.attitude`? 
 
-CODE_BLOCK_HIER
+```{r}
+anova(model.attitude, model.attitude.re.slope)
+```
+
 
 Könnten wir hier ein Intercepts-Only-Modell begründen? 
 
@@ -176,7 +194,7 @@ Wir schauen uns zuerst ein Intercept-Only-Modell an:
 coef(model.attitude)
 ```
 
-Wir sehen, dass das Intercept für jedes `subject` und `scenario` ist, aber die Koeffizienten für die Anstige (`genderM` und `attitudepol`) überall gleich sind und zwar die gleichen, die es als fixe Effekte gibt!  Bei dem Modell mit Anstieg in der RE-Struktur gibt es einen Anstieg für jedes `subject` und `scenario`.
+Wir sehen, dass das Intercept für jedes `subject` und `scenario` ist, aber die Koeffizienten für die Anstiege (`genderM` und `attitudepol`) überall gleich sind und zwar die gleichen, die es als fixe Effekte gibt!  Bei dem Modell mit Anstieg in der RE-Struktur gibt es einen Anstieg für jedes `subject` und `scenario`.
 
 ```{r}
 coef(model.attitude.re.slope)
